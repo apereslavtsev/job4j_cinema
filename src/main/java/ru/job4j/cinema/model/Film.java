@@ -12,7 +12,7 @@ public class Film {
             "year", "year",
             "genre_id", "genreId",
             "minimal_age", "minimalAge",
-            "durationIn_minutes", "durationInMinutes",
+            "duration_in_minutes", "durationInMinutes",
             "file_id", "fileId"
     );
     

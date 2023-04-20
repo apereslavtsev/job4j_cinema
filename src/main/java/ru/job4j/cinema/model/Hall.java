@@ -1,8 +1,17 @@
 package ru.job4j.cinema.model;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Hall {
+    
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "name", "name",
+            "row_count", "rowCount",
+            "place_count", "placeCount",
+            "description", "description"
+    );
     
     private int id;
     
@@ -12,7 +21,7 @@ public class Hall {
     
     private int placeCount;
     
-    private String descriprion;
+    private String description;
 
     public Hall(int id, String name, int rowCount, int placeCount, String descriprion) {
         super();
@@ -20,7 +29,7 @@ public class Hall {
         this.name = name;
         this.rowCount = rowCount;
         this.placeCount = placeCount;
-        this.descriprion = descriprion;
+        this.description = descriprion;
     }
     
     public Hall() {
@@ -42,8 +51,8 @@ public class Hall {
         return placeCount;
     }
 
-    public String getDescriprion() {
-        return descriprion;
+    public String getDescription() {
+        return description;
     }
 
     public void setId(int id) {
@@ -62,8 +71,8 @@ public class Hall {
         this.placeCount = placeCount;
     }
 
-    public void setDescriprion(String descriprion) {
-        this.descriprion = descriprion;
+    public void setDescription(String descriprion) {
+        this.description = descriprion;
     }
 
     @Override

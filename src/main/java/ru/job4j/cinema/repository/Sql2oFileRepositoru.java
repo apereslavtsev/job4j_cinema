@@ -14,7 +14,6 @@ public class Sql2oFileRepositoru implements FileRepository {
     
     
     public Sql2oFileRepositoru(Sql2o sql2o) {
-        super();
         this.sql2o = sql2o;
     }
 
