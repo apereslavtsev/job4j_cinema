@@ -25,15 +25,15 @@ public class User {
         
     }
     
-    public User(int id, String name, String email, String password) {
+    public User(int id, String fullName, String email, String password) {
         this.id = id;
-        this.fullName = name;
+        this.fullName = fullName;
         this.email = email;        
         this.password = password;
     }
     
-    public User(String name, String email, String password) {        
-        this.fullName = name;
+    public User(String fullName, String email, String password) {        
+        this.fullName = fullName;
         this.email = email;
         this.password = password;
     }
