@@ -59,4 +59,11 @@ class Sql2oHallRepositoryTest {
         assertThat(result).usingRecursiveComparison().isEqualTo(expectedResult);
     }
     
+    
+    @Test
+    void whenGetByInvalidIDThenReturnNull() {
+        var result = sql2oHallRepository.findById(101);
+        assertThat(result).isNull();
+    }
+    
 }

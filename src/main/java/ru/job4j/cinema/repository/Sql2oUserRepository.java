@@ -24,7 +24,8 @@ public class Sql2oUserRepository implements UserRepository {
                     .addParameter("email", user.getEmail())
                     .addParameter("full_name", user.getFullName())
                     .addParameter("password", user.getPassword());
-            int generatedId = query.executeUpdate().getKey(Integer.class);
+            int generatedId = query.setColumnMappings(User.COLUMN_MAPPING)
+                    .executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
             return Optional.of(user);
         }
@@ -35,7 +36,10 @@ public class Sql2oUserRepository implements UserRepository {
         try (var connection = sql2o.open()) {
             var query = connection.createQuery("SELECT * FROM users WHERE "
                     + "email = :email and password = :password");
-            User usr = query.addParameter("email", email).addParameter("password", password)
+            User usr = query
+                    .addParameter("email", email)
+                    .addParameter("password", password)
+                    .setColumnMappings(User.COLUMN_MAPPING)
                     .executeAndFetchFirst(User.class);
             return Optional.ofNullable(usr);
         }

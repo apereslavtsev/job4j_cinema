@@ -71,5 +71,12 @@ class Sql2oFilmSessionRepositoryTest {
         assertThat(result).usingRecursiveComparison()
             .isEqualTo(expectedResult);
     }
+    
+    
+    @Test
+    void whenGetByInvalidIDThenReturnNull() {
+        var result = sql2oFilmSessionRepository.findById(101);
+        assertThat(result).isNull();
+    }
 
 }

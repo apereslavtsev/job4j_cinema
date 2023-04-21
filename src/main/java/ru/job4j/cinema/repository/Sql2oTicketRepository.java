@@ -18,7 +18,7 @@ public class Sql2oTicketRepository implements TicketRepository {
     }
 
     @Override
-    public Ticket save(Ticket ticket) {
+    public Optional<Ticket> save(Ticket ticket) {
         try (var connection = sql2o.open()) {
             var sql = """
                       INSERT INTO tickets (
@@ -35,7 +35,7 @@ public class Sql2oTicketRepository implements TicketRepository {
                     .addParameter("user_id", ticket.getUserId());
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
-            return ticket;
+            return Optional.of(ticket);
         }
     }
 

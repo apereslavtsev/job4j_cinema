@@ -1,19 +1,21 @@
 package ru.job4j.cinema.repository;
 
+import static java.util.Collections.emptyList;
+import static java.util.Optional.empty;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
-import ru.job4j.cinema.model.Hall;
 import ru.job4j.cinema.model.Ticket;
 
 class Sql2oTicketRepositoryTest {
@@ -37,26 +39,62 @@ class Sql2oTicketRepositoryTest {
         sql2oTicketRepository = new Sql2oTicketRepository(sql2o);
     }
 
-
+    @AfterEach
+    public void clearVacancies() {
+        var tickets = sql2oTicketRepository.findAll();
+        for (var ticket : tickets) {
+            sql2oTicketRepository.deleteById(ticket.getId());
+        }
+    }
     
     @Test
-    void whenSave2AndFindAllThenReturnAll() {
-        var ticket = new Ticket(1, 1, 2, 2, 1);
-        sql2oTicketRepository.save(ticket);
+    void whenSave2AndThengetAll2() {
+        var ticket1 = sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1)).get();
+        var ticket2 = sql2oTicketRepository.save(new Ticket(2, 1, 2, 1, 1)).get();
         
         var result = sql2oTicketRepository.findAll();
-        //assertThat(result).usingRecursiveComparison()
-        //    .isEqualTo(expectedResult);
-        
+        assertThat(result).usingRecursiveComparison()
+            .isEqualTo(List.of(ticket1, ticket2));
     }
     
     @Test
-    void whenGetByIDThenReturnSame() {
-        var expectedResult = new Hall(1, "Зал 1 первый этаж", 10, 10, "Зал 1 Тёмный 10*10");
+    public void whenSaveThenGetSame() {
+        var ticket1 = sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1)).get();
+        
+        var savedCandidate = sql2oTicketRepository.findById(ticket1.getId()).get();
+        assertThat(savedCandidate).usingRecursiveComparison().isEqualTo(savedCandidate);
+    }
 
-        var result = sql2oTicketRepository.findById(1);
-        assertThat(result).usingRecursiveComparison().isEqualTo(expectedResult);
+    @Test
+    public void whenDontSaveThenNothingFound() {
+        assertThat(sql2oTicketRepository.findAll()).isEqualTo(emptyList());
+        assertThat(sql2oTicketRepository.findById(0)).isEqualTo(empty());
+    }
+
+    @Test
+    public void whenDeleteThenGetEmptyOptional() {
+        var ticket = sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1)).get();
+        
+        var isDeleted = sql2oTicketRepository.deleteById(ticket.getId());
+        var savedVacancy = sql2oTicketRepository.findById(ticket.getId());
+        assertThat(isDeleted).isTrue();
+        assertThat(savedVacancy).isEqualTo(empty());
+    }
+
+    @Test
+    public void whenDeleteByInvalidIdThenGetFalse() {
+        assertThat(sql2oTicketRepository.deleteById(0)).isFalse();
     }
     
+    @Test
+    public void whenSaveDuplicateTicketThenExaption() {
+        sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1));
+        
+        assertThatThrownBy(() -> 
+            sql2oTicketRepository.save(new Ticket(2, 1, 2, 2, 1)))
+            .isInstanceOf(Sql2oException.class)
+            .message()
+            .isNotEmpty();
+    } 
 
 }

@@ -3,8 +3,7 @@ package ru.job4j.cinema.repository;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -12,11 +11,11 @@ import org.junit.jupiter.api.Test;
 import org.sql2o.Sql2o;
 
 import ru.job4j.cinema.configuration.DatasourceConfiguration;
-import ru.job4j.cinema.model.Genre;
+import ru.job4j.cinema.model.File;
 
-class Sql2oGenreRepositoryTest {
-    
-    private static Sql2oGenreRepository sql2oGenreRepository;
+class Sql2oFileRepositoryTest {
+
+    private static Sql2oFileRepository sql2oFileRepository;
     
     @BeforeAll
     public static void initRepositories() throws Exception {
@@ -32,36 +31,22 @@ class Sql2oGenreRepositoryTest {
         var configuration = new DatasourceConfiguration();
         var datasource = configuration.connectionPool(url, username, password);
         Sql2o sql2o = configuration.databaseClient(datasource);
-        sql2oGenreRepository = new Sql2oGenreRepository(sql2o);
+        sql2oFileRepository = new Sql2oFileRepository(sql2o);
     }
-
-    
-    @Test
-    void whenFindAllThenReturnAll() {
-        List<Genre> expectedResult = new ArrayList<>();
-        expectedResult.add(new Genre(1, "Комедия"));
-        expectedResult.add(new Genre(2, "Ужасы"));
-        expectedResult.add(new Genre(3, "Приключения"));
-        expectedResult.add(new Genre(4, "Мультфильм"));
-
-        var result = sql2oGenreRepository.findAll();
-        assertThat(result).usingRecursiveComparison()
-            .isEqualTo(expectedResult);
-    }
-    
+     
     @Test
     void whenGetByIDThenReturnSame() {
-        var expectedResult = new Genre(2, "Ужасы");
+        var expectedResult = new File(1, "Индиана Джонс", "files\\IJandCrystalSkull.jpg");
 
-        var result = sql2oGenreRepository.findById(2);
+        var result = sql2oFileRepository.findById(1).get();
         assertThat(result).usingRecursiveComparison()
             .isEqualTo(expectedResult);
     }
     
-    
-    @Test
-    void whenGetByInvalidIDThenReturnNull() {
-        var result = sql2oGenreRepository.findById(101);
-        assertThat(result).isNull();
-    }
+   @Test
+   void whenGetByIDThenReturnEmpty() {
+       var result = sql2oFileRepository.findById(65);
+       assertThat(result).usingRecursiveComparison()
+           .isEqualTo(Optional.empty());
+   }
 }

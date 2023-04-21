@@ -6,7 +6,7 @@ import java.util.Optional;
 import ru.job4j.cinema.model.Ticket;
 
 public interface TicketRepository {
-    Ticket save(Ticket ticket);
+    Optional<Ticket> save(Ticket ticket);
 
     boolean deleteById(int id);
 
