@@ -2,9 +2,12 @@ package ru.job4j.cinema.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.repository.UserRepository;
 
+@Service
 public class SimpleUserService implements UserService {
     
     UserRepository userRepository;

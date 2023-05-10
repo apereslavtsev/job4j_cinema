@@ -3,6 +3,8 @@ package ru.job4j.cinema.service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import ru.job4j.cinema.dto.FilmDto;
@@ -18,36 +20,45 @@ public class SimpleFilmService implements FilmService {
     
     GenreRepository genreRepository;
     
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
+    
     public SimpleFilmService(FilmRepository filmRepository, 
             GenreRepository genreRepository) {
         
         this.filmRepository = filmRepository;
         this.genreRepository = genreRepository;
     }
+    
+    private FilmDto filmDtoFromFilm(Film film) {
+        Genre genre = genreRepository.findById(film.getGenreId());
+        if (genre == null) {
+            throwExeption("Genre", film.getGenreId());
+        }
+        return new FilmDto(film, genre.getName());
+    }
+    
+    private void throwExeption(String objectName, int id) {
+        LOG.error(objectName + " id=" 
+                + String.valueOf(id) + " not found!");
+        
+        throw new IllegalArgumentException(objectName + " id=" 
+                + String.valueOf(id) + " not found!");
+    }
 
     @Override
     public FilmDto findById(int id) {
-        Film film = filmRepository.findById(id);        
-        return filmDtoFromFilm(film);
-    }
-    
-    private FilmDto filmDtoFromFilm(Film film) {
+        Film film = filmRepository.findById(id); 
         if (film == null) {
-            throw new IllegalArgumentException("Film not found!");
+            throwExeption("Film", id);
         }
-        Genre genre = genreRepository.findById(film.getGenreId());
-        if (genre == null) {
-            throw new IllegalArgumentException("Genre id="
-                    + String.valueOf(film.getGenreId()) + " not found!");
-        }
-        return new FilmDto(film, genre.getName());
+        return filmDtoFromFilm(film);
     }
 
     @Override
     public Collection<FilmDto> findAll() {
         return filmRepository.findAll().stream()
-        .map(film -> filmDtoFromFilm(film))
-        .collect(Collectors.toList());        
+            .map(film -> filmDtoFromFilm(film))
+            .collect(Collectors.toList());        
     }
 
 }

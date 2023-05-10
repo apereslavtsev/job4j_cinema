@@ -18,13 +18,14 @@ public class FilmDto {
     
     private String genre;
     
+    private int fileTd;
+    
     public FilmDto() {
         
     }
     
     public FilmDto(int id, String name, String description, String year, 
-            int minimalAge, int durationInMinutes, String genre) {
-        super();
+            int minimalAge, int durationInMinutes, String genre, int fileId) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -32,6 +33,7 @@ public class FilmDto {
         this.minimalAge = minimalAge;
         this.durationInMinutes = durationInMinutes;
         this.genre = genre;
+        this.fileTd = fileId;
     }
 
     public FilmDto(Film film) {
@@ -40,7 +42,8 @@ public class FilmDto {
         setDescription(film.getDescription());
         setYear(film.getYear());
         setMinimalAge(film.getMinimalAge());
-        setDurationInMinutes(film.getDurationInMinutes());        
+        setDurationInMinutes(film.getDurationInMinutes());
+        setFileTd(film.getFileId());
     }
     
     public FilmDto(Film film, String genre) {
@@ -102,8 +105,15 @@ public class FilmDto {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    } 
+    }
     
-    
+    public int getFileTd() {
+        return fileTd;
+    }
 
+    public void setFileTd(int fileTd) {
+        this.fileTd = fileTd;
+    }
+
+    
 }

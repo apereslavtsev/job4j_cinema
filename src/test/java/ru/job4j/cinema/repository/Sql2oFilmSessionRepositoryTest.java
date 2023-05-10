@@ -54,10 +54,7 @@ class Sql2oFilmSessionRepositoryTest {
                 LocalDateTime.of(2023, 4, 20, 14, 0), LocalDateTime.of(2023, 4, 20, 15, 30), 150));
 
         var result = sql2oFilmSessionRepository.findAll();
-        
-        expectedResult.forEach(System.out::println);
-        result.forEach(System.out::println);
-        
+       
         assertThat(result).usingRecursiveComparison()
             .isEqualTo(expectedResult);
     }

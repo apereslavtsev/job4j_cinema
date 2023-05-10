@@ -23,9 +23,8 @@ public class FilmSessionDto {
         
     }
     
-    public FilmSessionDto(int id, String film, String filmDescription, String hall, LocalDateTime startTime,
+    public FilmSessionDto(int id, String film, String hall, LocalDateTime startTime,
             LocalDateTime endTime, float price) {
-        super();
         this.id = id;
         this.film = film;
         this.hall = hall;

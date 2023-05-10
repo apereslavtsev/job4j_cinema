@@ -24,7 +24,6 @@ public class Hall {
     private String description;
 
     public Hall(int id, String name, int rowCount, int placeCount, String descriprion) {
-        super();
         this.id = id;
         this.name = name;
         this.rowCount = rowCount;
