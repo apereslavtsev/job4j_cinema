@@ -2,10 +2,12 @@ package ru.job4j.cinema.dto;
 
 import java.time.LocalDateTime;
 
+import ru.job4j.cinema.model.Film;
 import ru.job4j.cinema.model.FilmSession;
+import ru.job4j.cinema.model.Hall;
 
 public class FilmSessionDto {
-    
+
     private int id;
     
     private String film;
@@ -17,20 +19,22 @@ public class FilmSessionDto {
     private LocalDateTime endTime;
     
     private float price;
-
+    
+    private int fileId;
     
     public FilmSessionDto() {
         
     }
     
     public FilmSessionDto(int id, String film, String hall, LocalDateTime startTime,
-            LocalDateTime endTime, float price) {
+            LocalDateTime endTime, float price, int fileId) {
         this.id = id;
         this.film = film;
         this.hall = hall;
         this.startTime = startTime;
         this.endTime = endTime;
         this.price = price;
+        this.fileId = fileId;
     }
     
     public FilmSessionDto(FilmSession filmSession) {
@@ -40,10 +44,11 @@ public class FilmSessionDto {
         setPrice(filmSession.getPrice());        
     }
 
-    public FilmSessionDto(FilmSession filmSession, String film, String hall) {
+    public FilmSessionDto(FilmSession filmSession, Film film, Hall hall) {
       this(filmSession);
-      this.film = film;
-      this.hall = hall;
+      setFilm(film.getName());
+      setFileId(film.getFileId());
+      setHall(hall.getName());
     }
     
     public int getId() {
@@ -94,6 +99,12 @@ public class FilmSessionDto {
         this.price = price;
     }
     
-    
+    public int getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
+    }
     
 }

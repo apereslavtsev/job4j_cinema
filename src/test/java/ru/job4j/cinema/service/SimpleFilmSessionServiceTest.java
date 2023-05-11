@@ -56,7 +56,7 @@ class SimpleFilmSessionServiceTest {
         
         var expectedFilmSessionDto = new FilmSessionDto(1, "тест фильм", "Холл Тест",
                 LocalDateTime.of(2023, 4, 20, 9, 0), 
-                LocalDateTime.of(2023, 4, 20, 10, 20), 320);
+                LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1);
         
         var atualFilSessionDto = filmSessionService.findById(1);
         
@@ -137,13 +137,13 @@ class SimpleFilmSessionServiceTest {
         var expectedFilmSessionsDto =  List.of(
                 new FilmSessionDto(1, "тест фильм 55", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 320),
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1),
                 new FilmSessionDto(2, "тест фильм 56", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 100),
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 100, 1),
                 new FilmSessionDto(3, "тест фильм 57", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 5)
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 5, 1)
                 );
         
         var actualFilmSessionsDto = filmSessionService.findAll();

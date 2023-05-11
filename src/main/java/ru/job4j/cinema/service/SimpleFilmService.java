@@ -32,12 +32,12 @@ public class SimpleFilmService implements FilmService {
     private FilmDto filmDtoFromFilm(Film film) {
         Genre genre = genreRepository.findById(film.getGenreId());
         if (genre == null) {
-            throwExeption("Genre", film.getGenreId());
+            throwNotFoundByIdExeption("Genre", film.getGenreId());
         }
-        return new FilmDto(film, genre.getName());
+        return new FilmDto(film, genre);
     }
     
-    private void throwExeption(String objectName, int id) {
+    private void throwNotFoundByIdExeption(String objectName, int id) {
         LOG.error(objectName + " id=" 
                 + String.valueOf(id) + " not found!");
         
@@ -49,7 +49,7 @@ public class SimpleFilmService implements FilmService {
     public FilmDto findById(int id) {
         Film film = filmRepository.findById(id); 
         if (film == null) {
-            throwExeption("Film", id);
+            throwNotFoundByIdExeption("Film", id);
         }
         return filmDtoFromFilm(film);
     }

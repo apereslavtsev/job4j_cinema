@@ -1,6 +1,7 @@
 package ru.job4j.cinema.dto;
 
 import ru.job4j.cinema.model.Film;
+import ru.job4j.cinema.model.Genre;
 
 public class FilmDto {
     
@@ -46,9 +47,9 @@ public class FilmDto {
         setFileTd(film.getFileId());
     }
     
-    public FilmDto(Film film, String genre) {
+    public FilmDto(Film film, Genre genre) {
         this(film);
-        this.genre = genre;
+        setGenre(genre.getName());
     }
 
     public int getId() {
@@ -114,6 +115,5 @@ public class FilmDto {
     public void setFileTd(int fileTd) {
         this.fileTd = fileTd;
     }
-
     
 }

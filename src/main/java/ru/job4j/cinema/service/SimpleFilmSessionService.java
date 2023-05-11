@@ -37,16 +37,16 @@ public class SimpleFilmSessionService implements FilmSessionService {
         Film film = filmRepository.findById(filmSession.getFilmId());
         Hall hall = hallRepository.findById(filmSession.getHallId());
         if (film == null) {
-            throwExeption("Film", filmSession.getFilmId());
+            throwNotFoundByIdExeption("Film", filmSession.getFilmId());
         }
         if (hall == null) {
-            throwExeption("Hall", filmSession.getHallId());            
+            throwNotFoundByIdExeption("Hall", filmSession.getHallId());            
         }
         
-        return new FilmSessionDto(filmSession, film.getName(), hall.getName());
+        return new FilmSessionDto(filmSession, film, hall);
     }
 
-    private void throwExeption(String objectName, int id) {
+    private void throwNotFoundByIdExeption(String objectName, int id) {
         LOG.error(objectName + " id=" 
                 + String.valueOf(id) + " not found!");
         
@@ -59,7 +59,7 @@ public class SimpleFilmSessionService implements FilmSessionService {
         FilmSession filmSession = filmSessionRepository.findById(id);
         
         if (filmSession == null) {
-            throwExeption("Film session", id);
+            throwNotFoundByIdExeption("Film session", id);
         }
         
         return filmSessionDtoFromFilmSession(filmSession);
