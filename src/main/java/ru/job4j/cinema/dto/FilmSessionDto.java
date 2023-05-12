@@ -12,6 +12,8 @@ public class FilmSessionDto {
     
     private String film;
     
+    private String filmDescription;
+    
     private String hall; 
     
     private LocalDateTime startTime;
@@ -21,6 +23,10 @@ public class FilmSessionDto {
     private float price;
     
     private int fileId;
+        
+    private int placeCount;
+    
+    private int rowCount;
     
     public FilmSessionDto() {
         
@@ -38,17 +44,20 @@ public class FilmSessionDto {
     }
     
     public FilmSessionDto(FilmSession filmSession) {
-        setId(filmSession.getId());
-        setStartTime(filmSession.getStartTime());
-        setEndTime(filmSession.getEndTime());
-        setPrice(filmSession.getPrice());        
+        this.id = filmSession.getId();
+        this.startTime = filmSession.getStartTime();
+        this.endTime = filmSession.getEndTime();
+        this.price = filmSession.getPrice();        
     }
 
     public FilmSessionDto(FilmSession filmSession, Film film, Hall hall) {
       this(filmSession);
-      setFilm(film.getName());
-      setFileId(film.getFileId());
-      setHall(hall.getName());
+      this.film = film.getName();
+      this.filmDescription = film.getDescription();
+      this.fileId = film.getFileId();
+      this.hall = hall.getName();
+      this.placeCount = hall.getPlaceCount();
+      this.rowCount = hall.getRowCount();      
     }
     
     public int getId() {
@@ -105,6 +114,30 @@ public class FilmSessionDto {
 
     public void setFileId(int fileId) {
         this.fileId = fileId;
+    }
+
+    public int getPlaceCount() {
+        return placeCount;
+    }
+
+    public void setPlaceCount(int placeCount) {
+        this.placeCount = placeCount;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
+    }
+    
+    public String getFilmDescription() {
+        return filmDescription;
+    }
+
+    public void setFilmDescription(String filmDescription) {
+        this.filmDescription = filmDescription;
     }
     
 }

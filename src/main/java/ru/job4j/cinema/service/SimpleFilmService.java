@@ -1,6 +1,7 @@
 package ru.job4j.cinema.service;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -41,7 +42,7 @@ public class SimpleFilmService implements FilmService {
         LOG.error(objectName + " id=" 
                 + String.valueOf(id) + " not found!");
         
-        throw new IllegalArgumentException(objectName + " id=" 
+        throw new NoSuchElementException(objectName + " id=" 
                 + String.valueOf(id) + " not found!");
     }
 

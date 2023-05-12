@@ -3,6 +3,7 @@ package ru.job4j.cinema.model;
 import java.util.Map;
 import java.util.Objects;
 
+
 public class User {
     
     public static final Map<String, String> COLUMN_MAPPING = Map.of(
@@ -23,6 +24,20 @@ public class User {
     
     public User() {
         
+    }    
+    
+    private static User getDefaultUser() {
+        User user = new User();
+        user.setFullName("Гость");
+        user.setId(-1);
+        return user;
+    }
+    
+    public static User getDefaultUserIfAbsent(User user) {
+        if (user == null) {
+            user = getDefaultUser();
+        }
+        return user;
     }
     
     public User(int id, String fullName, String email, String password) {
