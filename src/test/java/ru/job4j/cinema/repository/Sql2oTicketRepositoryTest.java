@@ -87,14 +87,11 @@ class Sql2oTicketRepositoryTest {
     }
     
     @Test
-    public void whenSaveDuplicateTicketThenExaption() {
+    public void whenSaveDuplicateTicketThenEmptyOptional() {
         sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1));
         
-        assertThatThrownBy(() -> 
-            sql2oTicketRepository.save(new Ticket(2, 1, 2, 2, 1)))
-            .isInstanceOf(Sql2oException.class)
-            .message()
-            .isNotEmpty();
+        assertThat(sql2oTicketRepository.save(new Ticket(1, 1, 2, 2, 1)))
+            .isEqualTo(empty());
     } 
 
 }

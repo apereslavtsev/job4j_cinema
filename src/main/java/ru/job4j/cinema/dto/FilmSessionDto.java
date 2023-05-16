@@ -33,7 +33,7 @@ public class FilmSessionDto {
     }
     
     public FilmSessionDto(int id, String film, String hall, LocalDateTime startTime,
-            LocalDateTime endTime, float price, int fileId) {
+            LocalDateTime endTime, float price, int fileId, int placeCount, int rowCount, String filmDescription) {
         this.id = id;
         this.film = film;
         this.hall = hall;
@@ -41,6 +41,9 @@ public class FilmSessionDto {
         this.endTime = endTime;
         this.price = price;
         this.fileId = fileId;
+        this.placeCount = placeCount;
+        this.rowCount = rowCount;
+        this.filmDescription = filmDescription;        
     }
     
     public FilmSessionDto(FilmSession filmSession) {

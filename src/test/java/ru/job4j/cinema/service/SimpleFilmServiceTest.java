@@ -7,6 +7,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ class SimpleFilmServiceTest {
             .thenReturn(null);
         
         assertThatThrownBy(() -> filmService.findById(2))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(NoSuchElementException.class)
             .message().isEqualTo("Film id=2 not found!");
     }    
     
@@ -69,7 +70,7 @@ class SimpleFilmServiceTest {
             .thenReturn(null);
         
         assertThatThrownBy(() -> filmService.findById(55))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(NoSuchElementException.class)
             .message().isEqualTo("Genre id=1 not found!");
     }
     

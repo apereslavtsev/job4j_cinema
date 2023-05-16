@@ -37,6 +37,9 @@ public class Sql2oTicketRepository implements TicketRepository {
             ticket.setId(generatedId);
             return Optional.of(ticket);
         }
+        catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     @Override

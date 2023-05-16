@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ class SimpleFilmSessionServiceTest {
         
         var expectedFilmSessionDto = new FilmSessionDto(1, "тест фильм", "Холл Тест",
                 LocalDateTime.of(2023, 4, 20, 9, 0), 
-                LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1);
+                LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1, 5, 5, "тест");
         
         var atualFilSessionDto = filmSessionService.findById(1);
         
@@ -71,7 +72,7 @@ class SimpleFilmSessionServiceTest {
             .thenReturn(null);
         
         assertThatThrownBy(() -> filmSessionService.findById(2))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(NoSuchElementException.class)
             .message().isEqualTo("Film session id=2 not found!");
     } 
     
@@ -87,7 +88,7 @@ class SimpleFilmSessionServiceTest {
             .thenReturn(new Hall(156, "Холл Тест", 5, 5, "Холл тест"));
         
         assertThatThrownBy(() -> filmSessionService.findById(1))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(NoSuchElementException.class)
             .message().isEqualTo("Film id=55 not found!");
     }
     
@@ -103,7 +104,7 @@ class SimpleFilmSessionServiceTest {
             .thenReturn(null);
         
         assertThatThrownBy(() -> filmSessionService.findById(1))
-            .isInstanceOf(IllegalArgumentException.class)
+            .isInstanceOf(NoSuchElementException.class)
             .message().isEqualTo("Hall id=156 not found!");
     }
     
@@ -137,13 +138,13 @@ class SimpleFilmSessionServiceTest {
         var expectedFilmSessionsDto =  List.of(
                 new FilmSessionDto(1, "тест фильм 55", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1),
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 320, 1, 5, 5, "тест"),
                 new FilmSessionDto(2, "тест фильм 56", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 100, 1),
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 100, 1, 5, 5, "тест"),
                 new FilmSessionDto(3, "тест фильм 57", "Холл Тест",
                         LocalDateTime.of(2023, 4, 20, 9, 0), 
-                        LocalDateTime.of(2023, 4, 20, 10, 20), 5, 1)
+                        LocalDateTime.of(2023, 4, 20, 10, 20), 5, 1, 5, 5, "тест")
                 );
         
         var actualFilmSessionsDto = filmSessionService.findAll();
