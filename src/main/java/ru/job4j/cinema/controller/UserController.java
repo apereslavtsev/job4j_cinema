@@ -34,7 +34,7 @@ public class UserController {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "errors/404";
         }
-        return "redirect:/";        
+        return "redirect:/users/login";        
     }
     
     @GetMapping("/login")

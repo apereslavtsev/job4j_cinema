@@ -20,9 +20,7 @@
     <form class="mt-3" th:action="@{/filmSessions/byTicket}" method="post" th:object="${filmSessionDTO}" enctype="multipart/form-data">
     
       <input type="hidden" name="id" th:field="*{id}">
-      
-
-      
+            
 	  <div class="row mb-3">
 	    <div class="col-3">
 			<div class="card" style="width: 18rem;">
@@ -33,11 +31,29 @@
 			</div>
 	    </div>
 	    <div class="col-9">
-	      <div class="mb-3">
-	      	<h4 th:text="*{hall}">				        
-	      </div>	      
-	      <p th:text="*{filmDescription}">
-	            
+		      <div class="mb-3">
+		      	<h4 th:text="*{hall}">				        
+		      </div>	      
+		      <p th:text="*{filmDescription}">
+		      <p th:text="${#temporals.format(filmSessionDTO.startTime, 'dd.MM.yyyy hh:mm')}">
+		       <p th:text="${#temporals.format(filmSessionDTO.endTime, 'dd.MM.yyyy hh:mm')}">
+		      <p th:text="*{price}">
+	      
+		    <div class="mb-3">
+	    		<label for="city"><b> Ряд </b></label>
+	    		<select class="form-control" id="row" name="row">
+	      		<option th:each="i: ${#numbers.sequence(1, filmSessionDTO.rowCount)}" 
+	      		th:value="${i}" th:text="${i}"></option>
+	    		</select>
+	  		</div>
+	  		
+	  		<div class="mb-3">
+	    		<label for="city"><b> Место </b></label>
+	    		<select class="form-control" id="place" name="place">
+	      		<option th:each="i: ${#numbers.sequence(1, filmSessionDTO.placeCount)}" 
+	      		th:value="${i}" th:text="${i}"></option>
+	    		</select>
+	  		</div>
 	      
 	    </div>
 	  </div>
@@ -47,9 +63,10 @@
         <div class="col-6"></div>
         <div class="col-6">
           <div class="row">
-          <div class="col-4"><button class="btn btn-success w-100" type="submit">Купить билет</button></div>
-            <div class="col-4"><a class="btn btn-light w-100" th:href="@{/filmSessions}">Отмена</a></div>           
-            
+	          <div class="col-4">
+	          	<button class="btn btn-success w-100" type="submit">Купить билет</button>
+	          </div>                    
+	          <div class="col-4"><a class="btn btn-light w-100" th:href="@{/filmSessions}">Отмена</a></div>      
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ package ru.job4j.cinema.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -58,15 +59,17 @@ public class FilmSessionController {
     }
     
     @PostMapping("/byTicket")
-    public String update(Model model, HttpSession session) {
-        
+    public String update(Model model, HttpSession session, HttpServletRequest request) {        
         try {
-            var user = (User) session.getAttribute("user");
+            var user = (User) session.getAttribute("user");  
+            if (user == null) {
+               return "users/login"; 
+            }
             
             Ticket savedTicket = new Ticket(0, 
-                    (int) model.getAttribute("id"),
-                    (int) model.getAttribute("rowNumber"), 
-                    (int) model.getAttribute("placeNumber"), 
+                    Integer.parseInt(request.getParameter("id")),
+                    Integer.parseInt(request.getParameter("row")), 
+                    Integer.parseInt(request.getParameter("place")), 
                     user.getId()
                     );
             
