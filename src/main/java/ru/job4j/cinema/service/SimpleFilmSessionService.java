@@ -48,11 +48,10 @@ public class SimpleFilmSessionService implements FilmSessionService {
     }
 
     private void throwNotFoundByIdExeption(String objectName, int id) {
-        LOG.error(objectName + " id=" 
-                + String.valueOf(id) + " not found!");
-        
-        throw new NoSuchElementException(objectName + " id=" 
-                + String.valueOf(id) + " not found!");
+        LOG.error(String.format(
+                "%s id=%d not found!", objectName, id));
+        throw new NoSuchElementException(String.format(
+                "%s id=%d not found!", objectName, id));
     }
 
     @Override

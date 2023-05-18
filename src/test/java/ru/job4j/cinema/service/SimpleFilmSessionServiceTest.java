@@ -45,7 +45,7 @@ class SimpleFilmSessionServiceTest {
     }
 
     @Test
-    void whenFindByIdhenReturnFileSessionDto() {
+    void whenFindByIdhenReturnFilmSessionDto() {
         when(filmSessionRepository.findById(any(Integer.class)))
             .thenReturn(new FilmSession(1, 55, 156, 
                     LocalDateTime.of(2023, 4, 20, 9, 0), 
@@ -64,7 +64,6 @@ class SimpleFilmSessionServiceTest {
         assertThat(atualFilSessionDto).usingRecursiveComparison()
             .isEqualTo(expectedFilmSessionDto);
     }
-    
     
     @Test
     void whenFindFilmSessionByInvalidIdhenReturnIllegalArgumentExeption() {

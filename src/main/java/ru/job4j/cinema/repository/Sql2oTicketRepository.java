@@ -21,13 +21,13 @@ public class Sql2oTicketRepository implements TicketRepository {
     public Optional<Ticket> save(Ticket ticket) {
         try (var connection = sql2o.open()) {
             var sql = """
-                      INSERT INTO tickets (
-                          session_id, row_number, place_number, user_id
-                      )
-                      VALUES (
-                          :session_id, :row_number, :place_number, :user_id
-                      )
-                      """;
+                    INSERT INTO tickets (
+                        session_id, row_number, place_number, user_id
+                    )
+                    VALUES (
+                        :session_id, :row_number, :place_number, :user_id
+                    )
+                    """;
             var query = connection.createQuery(sql, true)
                     .addParameter("session_id", ticket.getSessionId())
                     .addParameter("row_number", ticket.getRowNumber())
@@ -36,8 +36,7 @@ public class Sql2oTicketRepository implements TicketRepository {
             int generatedId = query.executeUpdate().getKey(Integer.class);
             ticket.setId(generatedId);
             return Optional.of(ticket);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

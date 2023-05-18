@@ -26,7 +26,7 @@ public class User {
         
     }    
     
-    private static User getDefaultUser() {
+    public static User getDefaultUser() {
         User user = new User();
         user.setFullName("Гость");
         user.setId(-1);
