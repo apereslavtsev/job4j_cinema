@@ -10,7 +10,7 @@ import ru.job4j.cinema.repository.GenreRepository;
 @Service
 public class SimpleGenreService implements GenreService {
     
-    GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
     
     public SimpleGenreService(GenreRepository genreRepository) {
         this.genreRepository = genreRepository;

@@ -10,7 +10,7 @@ import ru.job4j.cinema.model.File;
 @Repository
 public class Sql2oFileRepository implements FileRepository {
 
-    Sql2o sql2o;
+    private final Sql2o sql2o;
     
     
     public Sql2oFileRepository(Sql2o sql2o) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <fileset-config file-format-version="1.2.0" simple-config="false" sync-formatter="false">
-  <local-check-config name="maven-checkstyle-plugin validate" location="file:/C:/projects/eclipse/job4j_сinema/checkstyle.xml" type="remote" description="maven-checkstyle-plugin configuration validate">
-    <property name="checkstyle.header.file" value="C:\projects\eclipse\.metadata\.plugins\org.eclipse.core.resources\.projects\job4j_сinema\com.basistech.m2e.code.quality.checkstyleConfigurator\checkstyle-header-validate.txt"/>
+  <local-check-config name="maven-checkstyle-plugin validate" location="file:/C:/Users/apereslavtsev/egit/job4j_dreamjob/checkstyle.xml" type="remote" description="maven-checkstyle-plugin configuration validate">
+    <property name="checkstyle.header.file" value="C:\Users\apereslavtsev\egit\.metadata\.plugins\org.eclipse.core.resources\.projects\job4j_dreamjob\com.basistech.m2e.code.quality.checkstyleConfigurator\checkstyle-header-validate.txt"/>
     <property name="checkstyle.cache.file" value="${project_loc}/target/checkstyle-cachefile"/>
   </local-check-config>
   <fileset name="java-sources-validate" enabled="true" check-config-name="maven-checkstyle-plugin validate" local="true">

@@ -14,7 +14,7 @@ import ru.job4j.cinema.service.FilmService;
 @RequestMapping("/films")
 public class FilmController {
     
-    FilmService filmService;
+    private final FilmService filmService;
 
     public FilmController(FilmService filmService) {
         this.filmService = filmService;

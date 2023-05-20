@@ -11,7 +11,7 @@ import ru.job4j.cinema.repository.TicketRepository;
 @Service
 public class SimpleTicketService implements TicketService {
     
-    TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
     
     public SimpleTicketService(TicketRepository ticketRepository) {
         this.ticketRepository = ticketRepository;

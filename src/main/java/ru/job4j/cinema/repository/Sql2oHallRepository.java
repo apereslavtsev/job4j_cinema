@@ -9,7 +9,8 @@ import ru.job4j.cinema.model.Hall;
 
 @Repository
 public class Sql2oHallRepository implements HallRepository {
-    private Sql2o sql2o;
+    
+    private final Sql2o sql2o;
     
     public Sql2oHallRepository(Sql2o sql2o) {
         this.sql2o = sql2o;

@@ -3,6 +3,10 @@ package ru.job4j.cinema.model;
 import java.util.Objects;
 
 public class Genre {
+
+    private int id;
+    
+    private String name;
     
     public Genre() {        
     } 
@@ -12,11 +16,7 @@ public class Genre {
         this.name = name;
     }
     
-    private int id;
-    
-    private String name;
-
-    public final int getId() {
+    public int getId() {
         return id;
     }
 

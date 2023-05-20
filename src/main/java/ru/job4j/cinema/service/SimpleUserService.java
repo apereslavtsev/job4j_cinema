@@ -10,7 +10,7 @@ import ru.job4j.cinema.repository.UserRepository;
 @Service
 public class SimpleUserService implements UserService {
     
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public SimpleUserService(UserRepository userRepository) {
         this.userRepository = userRepository;

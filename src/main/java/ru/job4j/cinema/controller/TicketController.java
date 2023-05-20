@@ -31,7 +31,6 @@ public class TicketController {
    
     @PostMapping("/byTicket")
     public String byTicket(Model model, @ModelAttribute Ticket ticket) { 
-        
         try {
             if (ticket.getUserId() == User.getDefaultUser().getId()) {
                return "users/login"; 

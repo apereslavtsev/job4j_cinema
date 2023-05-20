@@ -10,7 +10,7 @@ import ru.job4j.cinema.repository.HallRepository;
 @Service
 public class SimpleHallService implements HallService {
     
-    HallRepository hallRepository;
+    private final HallRepository hallRepository;
     
     public SimpleHallService(HallRepository hallRepository) {
         this.hallRepository = hallRepository;

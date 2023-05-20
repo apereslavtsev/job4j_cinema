@@ -9,7 +9,7 @@ import ru.job4j.cinema.model.Film;
 @Repository
 public class Sql2oFilmRepository implements FilmRepository {
 
-    Sql2o sql2o;
+    private final Sql2o sql2o;
     
     public Sql2oFilmRepository(Sql2o sql2o) {
         this.sql2o = sql2o;

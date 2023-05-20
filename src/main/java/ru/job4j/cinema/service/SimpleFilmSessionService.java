@@ -19,13 +19,13 @@ import ru.job4j.cinema.repository.HallRepository;
 @Service
 public class SimpleFilmSessionService implements FilmSessionService {
 
-    FilmSessionRepository filmSessionRepository;
-    
-    FilmRepository filmRepository;
-    
-    HallRepository hallRepository;
-    
     private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
+    
+    private final FilmSessionRepository filmSessionRepository;
+    
+    private final FilmRepository filmRepository;
+    
+    private final HallRepository hallRepository;
     
     public SimpleFilmSessionService(FilmSessionRepository filmSessionRepository, 
             FilmRepository filmRepository, HallRepository hallRepository) {

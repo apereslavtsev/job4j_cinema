@@ -16,12 +16,12 @@ import ru.job4j.cinema.repository.GenreRepository;
 
 @Service
 public class SimpleFilmService implements FilmService {
-    
-    FilmRepository filmRepository;
-    
-    GenreRepository genreRepository;
-    
+
     private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
+    
+    private final FilmRepository filmRepository;
+    
+    private final GenreRepository genreRepository;
     
     public SimpleFilmService(FilmRepository filmRepository, 
             GenreRepository genreRepository) {

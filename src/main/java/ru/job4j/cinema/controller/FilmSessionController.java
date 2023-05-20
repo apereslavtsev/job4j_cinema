@@ -18,9 +18,9 @@ import ru.job4j.cinema.service.SimpleFilmService;
 @RequestMapping("/filmSessions")
 public class FilmSessionController {
     
-    FilmSessionService filmSessionService;
-    
     private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
+    
+    private final FilmSessionService filmSessionService;
     
     public FilmSessionController(FilmSessionService filmSessionService) {
         this.filmSessionService = filmSessionService;
