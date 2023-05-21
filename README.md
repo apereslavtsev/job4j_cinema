@@ -33,19 +33,19 @@
 # Взаимодействие с приложением
 
 ### Главная страница
-![](img/index.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/index.PNG)
 
 ### Страница со списком фильмов
-![](img/films.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/films.PNG)
 
 ### Страница со списком сеансов
-![](img/filmSessions.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/filmSessions.PNG)
 
 ### Страница с информацией о сеансе, и выборе места
-![](img/byTicket.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/byTicket.PNG)
 
 ### Страница успешной покупки билета
-![](img/succefulPurchase.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/succefulPurchase.PNG)
 
 ### Страница неуспешной покупки билета
-![](img/unsuccefulPurchase.png)
+![](https://github.com/apereslavtsev/job4j_cinema/blob/master/img/unsuccefulPurchase.PNG)
