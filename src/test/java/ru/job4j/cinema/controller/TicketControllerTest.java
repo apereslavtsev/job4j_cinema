@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 
 import ru.job4j.cinema.model.Ticket;
-import ru.job4j.cinema.model.User;
 import ru.job4j.cinema.service.TicketService;
 
 class TicketControllerTest {
@@ -32,13 +30,6 @@ class TicketControllerTest {
         model = new ConcurrentModel();
     }
 
-    @Test
-    void whenLogoutUserByTicketThenRedirectToLoginPage() {
-        String view = ticketController.byTicket(model, 
-                new Ticket(0, 0, 0, 0, User.getDefaultUser().getId()));
-        assertThat(view).isEqualTo("users/login");        
-    }
-    
     @Test
     void whenByTicketSuccessfulThenRedirectToSuccefulPurchasePage() {
         Ticket expectedTicket = new Ticket(1, 1, 3, 5, 1);
@@ -59,18 +50,6 @@ class TicketControllerTest {
         
         String view = ticketController.byTicket(model, ticket);
         assertThat(view).isEqualTo("tickets/unsuccessfulPurchase");
-    }
-    
-    @Test
-    void whenExeptionThenRedirectTo404Page() {
-        Ticket ticket = new Ticket(1, 1, 3, 5, 1);
-        when(ticketService.save(any(Ticket.class)))
-            .thenThrow(new NoSuchElementException("test Exeption!!"));
-        
-        String view = ticketController.byTicket(model, ticket);
-        assertThat(view).isEqualTo("errors/404");
-        assertThat(model.getAttribute("message"))
-            .isEqualTo("test Exeption!!");
     }
 
 }

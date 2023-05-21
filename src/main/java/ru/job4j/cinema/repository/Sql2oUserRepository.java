@@ -2,14 +2,18 @@ package ru.job4j.cinema.repository;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Sql2o;
 
 import ru.job4j.cinema.model.User;
+import ru.job4j.cinema.service.SimpleFilmService;
 
 @Repository
 public class Sql2oUserRepository implements UserRepository {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
     private final Sql2o sql2o;
     
     public Sql2oUserRepository(Sql2o sql2o) {
@@ -28,7 +32,10 @@ public class Sql2oUserRepository implements UserRepository {
                     .executeUpdate().getKey(Integer.class);
             user.setId(generatedId);
             return Optional.of(user);
+        } catch (Exception e) {
+            LOG.error("Save user exception", e);
         }
+        return  Optional.empty();
     }
 
     @Override

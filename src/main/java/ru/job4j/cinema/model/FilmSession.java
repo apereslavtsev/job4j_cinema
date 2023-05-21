@@ -27,7 +27,6 @@ public class FilmSession {
     private float price;
 
     public FilmSession(int id, int filmId, int hallId, LocalDateTime startTime, LocalDateTime endTime, float price) {
-        super();
         this.id = id;
         this.filmId = filmId;
         this.hallId = hallId;

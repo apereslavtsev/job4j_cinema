@@ -69,16 +69,5 @@ class FilmSessionControllerTest {
         assertThat(actualFilmSessionDto).usingRecursiveComparison()
             .isEqualTo(expectedfilmSessionDto);
     }
-    
-    @Test
-    public void whenGetByInvalidIdThenGetErrorPageWithMessage() {
-        when(filmSessionService.findById(any(Integer.class)))
-            .thenThrow(new NoSuchElementException("Film session id=2 not found!"));
-        
-        var view = filmSessionController.getById(model, 2);
-        var message = model.getAttribute("message");
-        
-        assertThat(view).isEqualTo("errors/404");
-        assertThat(message).isEqualTo("Film session id=2 not found!");
-    }
+
 }

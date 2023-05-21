@@ -1,6 +1,5 @@
 package ru.job4j.cinema.controller;
 
-import org.junit.runner.notification.RunListener.ThreadSafe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,13 +12,10 @@ import ru.job4j.cinema.dto.FilmSessionDto;
 import ru.job4j.cinema.service.FilmSessionService;
 import ru.job4j.cinema.service.SimpleFilmService;
 
-@ThreadSafe
 @Controller
 @RequestMapping("/filmSessions")
 public class FilmSessionController {
-    
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleFilmService.class.getName());
-    
+
     private final FilmSessionService filmSessionService;
     
     public FilmSessionController(FilmSessionService filmSessionService) {
@@ -34,17 +30,8 @@ public class FilmSessionController {
     
     @GetMapping("/{id}")
     public String getById(Model model, @PathVariable int id) {        
-        try {
             FilmSessionDto filmSessionDTO = filmSessionService.findById(id);
             model.addAttribute("filmSessionDTO", filmSessionDTO);
             return "tickets/shoppingPage";
-            
-        } catch (Exception e) {
-            model.addAttribute("message", e.getMessage());
-            LOG.error("Exception while getting filmSessionDTO", e);
-            return "errors/404";    
-        }
-        
     }
-
 }

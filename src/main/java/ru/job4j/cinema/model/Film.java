@@ -37,7 +37,6 @@ public class Film {
 
     public Film(int id, String name, String description, String year, int genreId, int minimalAge,
             int durationInMinutes, int fileId) {
-        super();
         this.id = id;
         this.name = name;
         this.description = description;

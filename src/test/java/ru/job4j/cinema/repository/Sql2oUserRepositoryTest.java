@@ -58,18 +58,17 @@ class Sql2oUserRepositoryTest {
     @Test
     public void whenGetEmpty() {
         var result = sql2oUserRepository.findByEmailAndPassword("email@example", "111");
-        assertThat(result).usingRecursiveComparison().isEqualTo(Optional.empty());
+        assertThat(result).isEqualTo(Optional.empty());
     }
     
     @Test
-    public void whenSaveDuplicateEmailThenExaption() {
-        sql2oUserRepository.save(new User("name", "email@example", "485"));
-        
-        assertThatThrownBy(() -> 
-            sql2oUserRepository.save(new User("name", "email@example", "485")))
-        .isInstanceOf(Sql2oException.class)
-        .message()
-        .isNotEmpty();
-    } 
+    public void whenSaveDuplicateEmailThenException() {
+        sql2oUserRepository.save(
+                new User("name", "email@example", "485"));
+
+        assertThat(sql2oUserRepository.save(
+                new User("name", "email@example", "485")))
+                .isEqualTo(Optional.empty());
+    }
 
 }

@@ -24,22 +24,8 @@ public class User {
     
     public User() {
         
-    }    
-    
-    public static User getDefaultUser() {
-        User user = new User();
-        user.setFullName("Гость");
-        user.setId(-1);
-        return user;
     }
-    
-    public static User getDefaultUserIfAbsent(User user) {
-        if (user == null) {
-            user = getDefaultUser();
-        }
-        return user;
-    }
-    
+
     public User(int id, String fullName, String email, String password) {
         this.id = id;
         this.fullName = fullName;

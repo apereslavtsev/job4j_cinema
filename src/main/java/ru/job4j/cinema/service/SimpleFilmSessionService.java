@@ -43,7 +43,6 @@ public class SimpleFilmSessionService implements FilmSessionService {
         if (hall == null) {
             throwNotFoundByIdExeption("Hall", filmSession.getHallId());            
         }
-        
         return new FilmSessionDto(filmSession, film, hall);
     }
 
